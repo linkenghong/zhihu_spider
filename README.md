@@ -16,7 +16,7 @@
 ```
 https://zhuanlan.zhihu.com/api/columns/maqianzu/articles?include=data%5B%2A%5D.admin_closed_comment%2Ccomment_count%2Csuggest_edit%2Cis_title_image_full_screen%2Ccan_comment%2Cupvoted_followees%2Ccan_open_tipjar%2Ccan_tip%2Cvoteup_count%2Cvoting%2Ctopics%2Creview_info%2Cauthor.is_following%2Cis_labeled%2Clabel_info&limit=10&offset=10
 ```
-其实这个才是真正我们需要的url，后面的limit是每页显示文章数，offset是指从第几篇后起显示，上述url可简化成：
+这个才是我们真正需要的，后面的limit是每页显示文章数，offset是指从第几篇后起显示，上述url可简化成：
 ```
 https://zhuanlan.zhihu.com/api/columns/maqianzu/articles?limit=10&offset=0
 ```
