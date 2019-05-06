@@ -5,7 +5,7 @@ import re
 import os
 import time
 
-def getHTMLText(url, code = "utf-8"): #»ñÈ¡HTML
+def getHTMLText(url, code = "utf-8"): #è·å–HTML
 	try:
 		headers = {"user-agent":"Mozilla/5.0"} 
 		r = requests.get(url,headers=headers)
@@ -15,13 +15,13 @@ def getHTMLText(url, code = "utf-8"): #»ñÈ¡HTML
 	except:
 		return ""
 	
-def getArtList(artList, columnURL): #»ñÈ¡×¨À¸ÄÚÎÄÕÂÁ´½Ó
+def getArtList(artList, columnURL): #è·å–ä¸“æ å†…æ–‡ç« é“¾æ¥
 	html = getHTMLText(columnURL)
-	ls = re.findall(r'"url".{0,60}, "comment', html)  #Í¨¹ıÍøÒ³Ô´´úÂë·ÖÎö¿ÉÒÔÖªµÀÎÄÕÂÁ´½ÓÔÚ"url"ÊôĞÔÄÚ
+	ls = re.findall(r'"url".{0,60}, "comment', html)  #é€šè¿‡ç½‘é¡µæºä»£ç åˆ†æå¯ä»¥çŸ¥é“æ–‡ç« é“¾æ¥åœ¨"url"å±æ€§å†…
 	for l in ls:
 		artList.append(l.split('"')[3])
 	
-def getImgList(imgList, artList): #»ñÈ¡ÎÄÕÂÄÚÍ¼Æ¬µØÖ·ÁĞ±í
+def getImgList(imgList, artList): #è·å–æ–‡ç« å†…å›¾ç‰‡åœ°å€åˆ—è¡¨
 	for url in artList:
 		html = getHTMLText(url)
 		soup = BeautifulSoup(html,'html.parser')
@@ -30,7 +30,7 @@ def getImgList(imgList, artList): #»ñÈ¡ÎÄÕÂÄÚÍ¼Æ¬µØÖ·ÁĞ±í
 			if match:
 				imgList.append(match.group(0))
 				
-def downloadImg(imgList, fpath): #ÏÂÔØÍ¼Æ¬
+def downloadImg(imgList, fpath): #ä¸‹è½½å›¾ç‰‡
 	headers = {"user-agent":"Mozilla/5.0"} 
 	for url in imgList:
 		print(url)
@@ -56,16 +56,16 @@ def downloadImg(imgList, fpath): #ÏÂÔØÍ¼Æ¬
 
 	
 def main():
-	#×¨À¸url£¬ÆäÖĞXXXÌæ»»³É×¨À¸Ãû£¬XXÌæ»»³ÉÒªÇóÅÀÈ¡µÄÎÄÕÂÊı£¬×îºÃÊÇ10µÄÕûÊı±¶£¬XÌæ»»³É´ÓµÚ¼¸ÆªÎÄÕÂ¿ªÊ¼ÅÀ
+	#ä¸“æ urlï¼Œå…¶ä¸­XXXæ›¿æ¢æˆä¸“æ åï¼ŒXXæ›¿æ¢æˆè¦æ±‚çˆ¬å–çš„æ–‡ç« æ•°ï¼Œæœ€å¥½æ˜¯10çš„æ•´æ•°å€ï¼ŒXæ›¿æ¢æˆä»ç¬¬å‡ ç¯‡æ–‡ç« å¼€å§‹çˆ¬
 	column_url = "https://zhuanlan.zhihu.com/api/columns/XXX/articles?limit=XX&offset=X" 
-	#´æ´¢µØÖ·£¬ÆäÖĞXXÌæ»»³ÉÅÌ·û£¬XÌæ»»³ÉÂ·¾¶ 
-	output_file = "XX:\X\\"
-	artList = []  #ÎÄÕÂÁĞ±í
-	imgList = []  #Í¼Æ¬ÁĞ±í
+	#å­˜å‚¨åœ°å€ï¼Œå…¶ä¸­XXæ›¿æ¢æˆç›˜ç¬¦ï¼ŒXæ›¿æ¢æˆè·¯å¾„ 
+	output_file = "XX://X//"
+	artList = []  #æ–‡ç« åˆ—è¡¨
+	imgList = []  #å›¾ç‰‡åˆ—è¡¨
 	getArtList(artList, column_url)
-	print("The length of artlist is " + str(len(artList))) #ÒªÅÀÈ¡µÄ×¨À¸ÏÂÎÄÕÂÊı
+	print("The length of artlist is " + str(len(artList))) #è¦çˆ¬å–çš„ä¸“æ ä¸‹æ–‡ç« æ•°
 	getImgList(imgList, artList)
-	print("The length of imglist is " + str(len(imgList))) #ÒªÅÀÈ¡µÄÍ¼Æ¬Êı
+	print("The length of imglist is " + str(len(imgList))) #è¦çˆ¬å–çš„å›¾ç‰‡æ•°
 	downloadImg(imgList, output_file)
 
 main()
