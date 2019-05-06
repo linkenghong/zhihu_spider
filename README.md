@@ -12,7 +12,7 @@
 
 * 专栏url
 
-如果直接用专栏地址，如：https://zhuanlan.zhihu.com/maqianzu，会发现直接爬的话，是查不到任何东西的。此时按F12键，点Network，然后把页面往下滑，会发现网页发起了个请求，其中一个以articles开头的会看到里面的Request URL如下：
+如果直接用专栏地址，如：https://zhuanlan.zhihu.com/maqianzu ，会发现直接爬的话，是查不到任何东西的。此时按F12键，点Network，然后把页面往下滑，会发现网页发起了个请求，其中一个以articles开头的会看到里面的Request URL如下：
 ```
 https://zhuanlan.zhihu.com/api/columns/maqianzu/articles?include=data%5B%2A%5D.admin_closed_comment%2Ccomment_count%2Csuggest_edit%2Cis_title_image_full_screen%2Ccan_comment%2Cupvoted_followees%2Ccan_open_tipjar%2Ccan_tip%2Cvoteup_count%2Cvoting%2Ctopics%2Creview_info%2Cauthor.is_following%2Cis_labeled%2Clabel_info&limit=10&offset=10
 ```
